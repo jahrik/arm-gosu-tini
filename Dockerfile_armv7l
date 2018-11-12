@@ -1,0 +1,6 @@
+FROM jahrik/arm-tini:armv7l
+FROM jahrik/arm-gosu:armv7l
+
+COPY docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
