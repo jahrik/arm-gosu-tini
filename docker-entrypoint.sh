@@ -13,7 +13,7 @@ fi
 # If GOSU_USER environment variable set to something other than 0:0 (root:root),
 # become user:group set within and exec command passed in args
 if [ "$GOSU_USER" != "0:0" ]; then
-	  exec gosu $GOSU_USER tini "$@"
+	  exec gosu $GOSU_USER tini -- "$@"
 else
-    exec tini "$@"
+    exec tini -- "$@"
 fi

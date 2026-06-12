@@ -1,10 +1,23 @@
-# gosu and tini in one docker image
+# arm-gosu-tini
 
+[![Build](https://github.com/jahrik/arm-gosu-tini/actions/workflows/build.yml/badge.svg)](https://github.com/jahrik/arm-gosu-tini/actions/workflows/build.yml)
+
+Multi-arch Ubuntu base image with [gosu](https://github.com/tianon/gosu) and [tini](https://github.com/krallin/tini): the entrypoint drops privileges per `GOSU_USER`, then runs your command under tini as PID 1.
+
+## Run
+
+```bash
+docker run --rm -e GOSU_USER=nobody:nogroup jahrik/arm-gosu-tini:latest ps -p 1 -o user=,comm=
+# nobody   tini
 ```
-root@rocks:~# docker run -it -e GOSU_USER=nobody jahrik/arm-gosu-tini:aarch64 bash
-nobody@a1be06e5d4b9:/$ ps waux
-USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-nobody       1  2.6  0.0   1812   356 pts/0    Ss   00:52   0:00 tini bash
-nobody      12  0.0  0.0   3776  2892 pts/0    S    00:52   0:00 bash
-nobody      15  0.0  0.0   5288  2272 pts/0    R+   00:53   0:00 ps waux
+
+Set `GOSU_CHOWN` to chown directories before stepping down.
+
+## Build
+
+```bash
+make build
+make push
 ```
+
+CI: PR builds + step-down/PID 1 checks; merge to main pushes multi-arch (amd64/arm64/armv7) to Docker Hub.
