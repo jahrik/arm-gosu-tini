@@ -5,7 +5,7 @@ Multi-arch base image: Ubuntu + [gosu](https://github.com/tianon/gosu) + [tini](
 ## Commands
 
 ```bash
-make build                                  # build jahrik/arm-gosu-tini:latest
+just build                                  # build jahrik/arm-gosu-tini:latest
 docker run --rm -e GOSU_USER=nobody:nogroup jahrik/arm-gosu-tini:latest id -un
 ```
 

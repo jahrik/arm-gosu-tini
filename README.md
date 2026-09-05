@@ -16,8 +16,8 @@ Set `GOSU_CHOWN` to chown directories before stepping down.
 ## Build
 
 ```bash
-make build
-make push
+just build
+just push
 ```
 
 CI: PR builds + step-down/PID 1 checks; merge to main pushes multi-arch (amd64/arm64/armv7) to Docker Hub.
